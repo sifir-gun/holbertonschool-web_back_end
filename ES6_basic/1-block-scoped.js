@@ -1,5 +1,4 @@
-export default function taskBlock()
-{
+export default function taskBlock() {
   const task = false;
   const task2 = true;
 
