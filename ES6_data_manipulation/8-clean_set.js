@@ -1,7 +1,7 @@
 export default function cleanSet (set, startString) {
   // Vérifie si startString est valide
   if (!startString || typeof startString !== 'string') {
-    return ''
+    return '';
   }
 
   // Filtre et transforme les valeurs du Set
