@@ -1,4 +1,4 @@
-export default function groceriesList () {
+export default function groceriesList() {
   // Crée un Map avec les articles et leurs quantités
   return new Map([
     ['Apples', 10],

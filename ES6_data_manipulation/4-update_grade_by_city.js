@@ -1,4 +1,4 @@
-export default function updateStudentGradeByCity (students, city, newGrades) {
+export default function updateStudentGradeByCity(students, city, newGrades) {
   // Vérifie si students est un tableau
   if (!Array.isArray(students)) {
     return [];

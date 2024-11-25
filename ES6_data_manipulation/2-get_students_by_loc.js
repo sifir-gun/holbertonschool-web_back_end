@@ -1,4 +1,4 @@
-export default function getStudentsByLocation (students, city) {
+export default function getStudentsByLocation(students, city) {
   // Vérifie si students est un tableau
   if (!Array.isArray(students)) {
     return [];

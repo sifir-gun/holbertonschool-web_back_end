@@ -1,4 +1,4 @@
-export default function updateUniqueItems (map) {
+export default function updateUniqueItems(map) {
   // Vérifie si l'argument est une Map
   if (!(map instanceof Map)) {
     throw new Error('Cannot process');
@@ -9,7 +9,7 @@ export default function updateUniqueItems (map) {
     if (value === 1) {
       map.set(key, 100); // Met à jour la quantité à 100
     }
-  })
+  });
 
   // La Map est modifiée directement
 }

@@ -1,4 +1,4 @@
-export default function getStudentIdsSum (students) {
+export default function getStudentIdsSum(students) {
   // Vérifie si students est un tableau
   if (!Array.isArray(students)) {
     return 0;
