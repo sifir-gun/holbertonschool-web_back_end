@@ -3,6 +3,7 @@
 Module contenant la fonction to_str avec annotations de type.
 """
 
+
 def to_str(n: float) -> str:
     """
     Convertit un nombre flottant en sa représentation en chaîne de caractères.

@@ -5,6 +5,7 @@ Module contenant la fonction sum_list avec annotations de type.
 
 from typing import List
 
+
 def sum_list(input_list: List[float]) -> float:
     """
     Calcule la somme d'une liste de nombres flottants et renvoie le résultat.
