@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
-
 import asyncio
-wait_random = __import__('0-basic_async_syntax').wait_random
+import random
 
-print(asyncio.run(wait_random()))
-print(asyncio.run(wait_random(5)))
-print(asyncio.run(wait_random(15)))
+
+async def wait_random(max_delay: int = 10) -> float:
+    """
+    Coroutine asynchrone qui attend un délai aléatoire entre 0 et max_delay
+    secondes (inclus), puis retourne la durée attendue.
+
+    Arguments:
+        max_delay (int): Durée maximale (en secondes) du délai. Par défaut, 10.
+
+    Retourne:
+        float: Le délai réel attendu.
+    """
+    delay: float = random.uniform(0, max_delay)
+    await asyncio.sleep(delay)
+    return delay

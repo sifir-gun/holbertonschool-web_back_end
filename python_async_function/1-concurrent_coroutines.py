@@ -5,9 +5,21 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
-    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
-    delays = []
+    """
+    Lance n coroutines de type wait_random(max_delay),
+    et retourne la liste des délais (float) dans l'ordre
+    où les tâches se terminent, sans utiliser sort().
+
+    Arguments:
+        n (int): Nombre de tâches à lancer.
+        max_delay (int): Délai maximum pour chaque coroutine.
+
+    Retourne:
+        List[float]: Liste des délais terminés, triée par ordre d'achèvement.
+    """
+    tasks: List[asyncio.Task] = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
+    delays: List[float] = []
     for finished_task in asyncio.as_completed(tasks):
-        delay = await finished_task
+        delay: float = await finished_task
         delays.append(delay)
     return delays
