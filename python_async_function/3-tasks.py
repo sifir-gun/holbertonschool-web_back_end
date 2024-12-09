@@ -9,7 +9,8 @@ def task_wait_random(max_delay: int) -> asyncio.Task:
     Crée et retourne une tâche asyncio basée sur la coroutine wait_random.
 
     Arguments:
-        max_delay (int): Temps maximum à attendre avant de retourner le résultat.
+        max_delay (int):
+        Temps maximum à attendre avant de retourner le résultat.
 
     Retourne:
         asyncio.Task: Tâche asyncio qui attend de manière asynchrone un délai.
