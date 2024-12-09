@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""
+Ce module définit une fonction asynchrone, wait_n, qui lance n coroutines
+attendant un délai aléatoire via wait_random(max_delay) et
+récupère leurs délais
+dans l'ordre où elles se terminent, sans utiliser la fonction sort().
+"""
 import asyncio
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random

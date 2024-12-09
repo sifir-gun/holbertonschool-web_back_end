@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+Ce module définit une fonction asynchrone task_wait_n qui exécute n fois
+la coroutine associée à task_wait_random(max_delay) puis retourne une liste
+des délais triés.
+"""
 import asyncio
 from typing import List
 task_wait_random = __import__('3-tasks').task_wait_random

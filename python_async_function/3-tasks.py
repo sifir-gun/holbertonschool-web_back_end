@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Ce module définit une fonction task_wait_random qui crée et retourne
+une tâche asyncio basée sur la coroutine wait_random.
+"""
 import asyncio
 
 wait_random = __import__('0-basic_async_syntax').wait_random
