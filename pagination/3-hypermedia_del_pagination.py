@@ -42,8 +42,8 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
-        Retourne un dictionnaire contenant une page de données basée sur un index,
-        qui reste cohérente même si des lignes ont été supprimées.
+        Retourne un dictionnaire contenant une page de données basée sur un
+        index, qui reste cohérente même si des lignes ont été supprimées.
 
         Args:
             index (int): L'index de départ (0-based) pour récupérer la page.
@@ -53,12 +53,16 @@ class Server:
         Returns:
             Dict: Un dictionnaire avec les clés suivantes:
                 - index (int): L'index actuel de départ de la page
-                - next_index (int): L'index suivant à interroger pour la page suivante
+                - next_index (int):
+                L'index suivant à interroger pour la page suivante
                 - page_size (int): Le nombre d'éléments réellement retournés
                 - data (List[List]): Les données de la page courante
         """
-        assert isinstance(index, int) and index >= 0, "Index must be a non-negative integer"
-        assert isinstance(page_size, int) and page_size > 0, "Page_size must be a positive integer"
+        assert isinstance(
+          index, int) and index >= 0, "Index must be a non-negative integer"
+        assert isinstance(
+          page_size, int) and page_size > 0,
+        "Page_size must be a positive integer"
 
         indexed_data = self.indexed_dataset()
         data_length = len(indexed_data)
@@ -70,7 +74,7 @@ class Server:
         data = []
         current_index = index
 
-        # Parcourir les index à partir de 'index' et récupérer 'page_size' items existants
+        # Parcourir les index à partir de 'index' et récupérer 'page_size'
         while len(data) < page_size and current_index < data_length:
             if current_index in indexed_data:
                 data.append(indexed_data[current_index])

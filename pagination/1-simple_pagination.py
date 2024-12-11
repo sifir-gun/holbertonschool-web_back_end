@@ -55,8 +55,11 @@ class Server:
                         An empty list if out of range.
         """
         # Vérification des arguments
-        assert isinstance(page, int) and page > 0, "page must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0, "page_size must be a positive integer"
+        assert isinstance(
+          page, int) and page > 0, "page must be a positive integer"
+        assert isinstance(
+          page_size, int) and page_size > 0,
+        "page_size must be a positive integer"
 
         start_index, end_index = index_range(page, page_size)
         data = self.dataset()
