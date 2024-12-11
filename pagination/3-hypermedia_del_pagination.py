@@ -54,15 +54,16 @@ class Server:
             Dict: Un dictionnaire avec les clés suivantes:
                 - index (int): L'index actuel de départ de la page
                 - next_index (int):
-                L'index suivant à interroger pour la page suivante
+                  L'index suivant à interroger pour la page suivante
                 - page_size (int): Le nombre d'éléments réellement retournés
                 - data (List[List]): Les données de la page courante
         """
-        assert isinstance(
-          index, int) and index >= 0, "Index must be a non-negative integer"
-        assert isinstance(
-          page_size, int) and page_size > 0,
-        "Page_size must be a positive integer"
+        assert isinstance(page, int) and page > 0, (
+            "page must be a positive integer"
+        )
+        assert isinstance(page_size, int) and page_size > 0, (
+            "page_size must be a positive integer"
+        )
 
         indexed_data = self.indexed_dataset()
         data_length = len(indexed_data)
@@ -75,6 +76,7 @@ class Server:
         current_index = index
 
         # Parcourir les index à partir de 'index' et récupérer 'page_size'
+        # items existants
         while len(data) < page_size and current_index < data_length:
             if current_index in indexed_data:
                 data.append(indexed_data[current_index])

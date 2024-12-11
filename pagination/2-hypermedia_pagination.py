@@ -54,11 +54,12 @@ class Server:
             List[List]: The list of items on this page of the dataset.
                         Returns an empty list if out of range.
         """
-        assert isinstance(
-          page, int) and page > 0, "page must be a positive integer"
-        assert isinstance(
-          page_size, int) and page_size > 0,
-        "page_size must be a positive integer"
+        assert isinstance(page, int) and page > 0, (
+            "page must be a positive integer"
+        )
+        assert isinstance(page_size, int) and page_size > 0, (
+            "page_size must be a positive integer"
+        )
 
         start_index, end_index = index_range(page, page_size)
         data = self.dataset()
@@ -76,7 +77,7 @@ class Server:
         - data (List[List]): current page of the dataset
         - next_page (int or None): next page number or None if no next page
         - prev_page (int or None):
-        previous page number or None if no previous page
+          previous page number or None if no previous page
         - total_pages (int): total number of pages in the dataset
 
         Args:
@@ -84,9 +85,8 @@ class Server:
             page_size (int): The number of items per page.
 
         Returns:
-            Dict: A dictionary with keys
-            'page_size', 'page', 'data', 'next_page',
-                  'prev_page', and 'total_pages'.
+            Dict: A dictionary with keys 'page_size', 'page', 'data',
+                  'next_page', 'prev_page', and 'total_pages'.
         """
         data = self.get_page(page, page_size)
         total_items = len(self.dataset())
