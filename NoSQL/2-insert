@@ -1,4 +1,3 @@
 // Insert a document into the collection "school"
-// The doc will have the attribute "name" with the value "Holberton school"
 db.school.insertOne({ name: "Holberton school" });
 quit();
