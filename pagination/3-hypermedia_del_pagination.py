@@ -19,25 +19,22 @@ class Server:
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
-                # On saute l'entête
+                # Skip the header
                 self.__dataset = [row for row in reader][1:]
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
         """Dataset indexed by sorting position, starting at 0."""
         if self.__indexed_dataset is None:
-            data = self.dataset()
-            self.__indexed_dataset = {i: data[i] for i in range(len(data))}
+            dataset = self.dataset()
+            truncated_dataset = dataset[:1000]
+            self.__indexed_dataset = {
+                i: truncated_dataset[i] for i in range(len(truncated_dataset))
+            }
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """
-        Returns a dictionary with pagination info:
-        index: start index of the page
-        next_index: next index to query with
-        page_size: current page size
-        data: actual page of the dataset
-        """
+        """Returns a dictionary with pagination info."""
         if index is None:
             index = 0
 
