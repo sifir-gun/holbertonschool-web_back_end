@@ -4,13 +4,10 @@ Deletion-resilient hypermedia pagination
 """
 
 import csv
-import math
 from typing import List, Dict
 
-
 class Server:
-    """Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
@@ -18,59 +15,49 @@ class Server:
         self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
-        """
+        """Cached dataset."""
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
-                dataset = [row for row in reader]
-            self.__dataset = dataset[1:]  # Exclure la ligne d'en-tête
-
+                # On saute l'entête
+                self.__dataset = [row for row in reader][1:]
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
-        """Dataset indexed by sorting position, starting at 0
-        """
+        """Dataset indexed by sorting position, starting at 0."""
         if self.__indexed_dataset is None:
-            dataset = self.dataset()
-            # L'exemple tronque à 1000, mais ce n’est pas obligatoire
-            # truncated_dataset = dataset[:1000]
-            self.__indexed_dataset = {
-                i: dataset[i] for i in range(len(dataset))
-            }
+            data = self.dataset()
+            self.__indexed_dataset = {i: data[i] for i in range(len(data))}
         return self.__indexed_dataset
 
-        def get_hyper_index(
-          self, index: int = None, page_size: int = 10
-        ) -> Dict:
-          """
-          Retourne un dictionnaire contenant une page de données basée sur un
-          index, qui reste cohérente même si des lignes ont été supprimées.
-          """
-          if index is None:
-              index = 0
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """
+        Returns a dictionary with pagination info:
+        index: start index of the page
+        next_index: next index to query with
+        page_size: current page size
+        data: actual page of the dataset
+        """
+        if index is None:
+            index = 0
 
-          indexed_data = self.indexed_dataset()
-          data_length = len(indexed_data)
+        indexed_data = self.indexed_dataset()
+        data_length = len(indexed_data)
 
-          # Vérifications
-          assert 0 <= index < data_length
-          assert page_size > 0
+        assert 0 <= index < data_length
+        assert page_size > 0
 
-          data = []
-          current_index = index
+        data = []
+        current_index = index
 
-          # Récupérer page_size éléments en avançant dans indexed_data
-          while len(data) < page_size and current_index < data_length:
-              if current_index in indexed_data:
-                  data.append(indexed_data[current_index])
-              current_index += 1
+        while len(data) < page_size and current_index < data_length:
+            if current_index in indexed_data:
+                data.append(indexed_data[current_index])
+            current_index += 1
 
-          next_index = current_index
-
-          return {
-              "index": index,
-              "data": data,
-              "page_size": len(data),
-              "next_index": next_index,
-          }
+        return {
+            "index": index,
+            "next_index": current_index,
+            "page_size": len(data),
+            "data": data
+        }
