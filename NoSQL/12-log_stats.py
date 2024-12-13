@@ -24,7 +24,7 @@ def log_stats():
         count = nginx_collection.count_documents({"method": method})
         # Quatre espaces avant "method"
         # pour correspondre exactement à l'exemple
-        print("method {}: {}".format(method, count))
+        print("\tmethod {}: {}".format(method, count))
 
     # Compter les requêtes status
     status_checks = nginx_collection.count_documents(
