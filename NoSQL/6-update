@@ -1,5 +1,4 @@
 // Upd all doc in the collection "school" where the name is "Holberton school"
-// Add the attribute "address" with the value "972 Mission street"
 db.school.updateMany(
   { name: "Holberton school" },
   { $set: { address: "972 Mission street" } },
