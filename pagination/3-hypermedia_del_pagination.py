@@ -40,35 +40,37 @@ class Server:
             }
         return self.__indexed_dataset
 
-        def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """
-        Retourne un dictionnaire contenant une page de données basée sur un
-        index, qui reste cohérente même si des lignes ont été supprimées.
-        """
-        if index is None:
-            index = 0
+        def get_hyper_index(
+          self, index: int = None, page_size: int = 10
+        ) -> Dict:
+          """
+          Retourne un dictionnaire contenant une page de données basée sur un
+          index, qui reste cohérente même si des lignes ont été supprimées.
+          """
+          if index is None:
+              index = 0
 
-        indexed_data = self.indexed_dataset()
-        data_length = len(indexed_data)
+          indexed_data = self.indexed_dataset()
+          data_length = len(indexed_data)
 
-        # Vérifications
-        assert 0 <= index < data_length
-        assert page_size > 0
+          # Vérifications
+          assert 0 <= index < data_length
+          assert page_size > 0
 
-        data = []
-        current_index = index
+          data = []
+          current_index = index
 
-        # Récupérer page_size éléments en avançant dans indexed_data
-        while len(data) < page_size and current_index < data_length:
-            if current_index in indexed_data:
-                data.append(indexed_data[current_index])
-            current_index += 1
+          # Récupérer page_size éléments en avançant dans indexed_data
+          while len(data) < page_size and current_index < data_length:
+              if current_index in indexed_data:
+                  data.append(indexed_data[current_index])
+              current_index += 1
 
-        next_index = current_index
+          next_index = current_index
 
-        return {
-            "index": index,
-            "data": data,
-            "page_size": len(data),
-            "next_index": next_index,
-        }
+          return {
+              "index": index,
+              "data": data,
+              "page_size": len(data),
+              "next_index": next_index,
+          }
