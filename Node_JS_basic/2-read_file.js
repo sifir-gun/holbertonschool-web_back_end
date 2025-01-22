@@ -35,7 +35,7 @@ function countStudents(path) {
   }
 
   console.log(`Number of students: ${totalStudents}`);
-  
+
   // Output each field's student count and list of first names.
   // Iterating in sorted order of the field names.
   Object.keys(students).sort((a, b) => a.localeCompare(b)).forEach((field) => {

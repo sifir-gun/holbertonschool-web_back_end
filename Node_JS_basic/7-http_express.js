@@ -6,12 +6,12 @@ const database = process.argv[2];
 
 app.get('/', (req, res) => {
   res.type('text/plain');
-  res.send("Hello Holberton School!");
+  res.send('Hello Holberton School!');
 });
 
 app.get('/students', (req, res) => {
   res.type('text/plain');
-  let output = "This is the list of our students\n";
+  const output = 'This is the list of our students\n';
   countStudents(database)
     .then((text) => {
       res.send(output + text);

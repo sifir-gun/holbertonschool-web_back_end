@@ -14,11 +14,11 @@ function countStudents(path) {
         resolve();
         return;
       }
-      
+
       // The first line is the header
       const header = lines.shift().split(',');
       const fieldIndex = header.indexOf('field');
-      
+
       let totalStudents = 0;
       const fields = {};
 
@@ -26,7 +26,7 @@ function countStudents(path) {
         const record = line.split(',');
         if (record.length < header.length) return;
         totalStudents += 1;
-        
+
         const field = record[fieldIndex];
         if (!fields[field]) {
           fields[field] = [];
