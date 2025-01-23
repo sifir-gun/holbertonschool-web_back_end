@@ -1,18 +1,24 @@
 // 1-stdin.js
 
-// Affiche le message de bienvenue
-process.stdout.write('Welcome to Holberton School, what is your name?\n');
+const readline = require('readline');
 
-// Variable pour stocker le nom de l'utilisateur
-let name = '';
-
-// Écoute de l'événement 'data' pour capturer l'entrée de l'utilisateur
-process.stdin.on('data', (data) => {
-  name += data.toString().trim();
-  console.log(`Your name is: ${name}`);
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-// Écoute de l'événement 'end' pour détecter la fin de l'entrée
-process.stdin.on('end', () => {
-  console.log('This important software is now closing');
+// Affiche le message de bienvenue avec un saut de ligne
+rl.question('Welcome to Holberton School, what is your name?\n', (name) => {
+  // Affiche le nom de l'utilisateur avec un saut de ligne
+  process.stdout.write(`Your name is: ${name}\n`);
+  rl.close();
+});
+
+// Lors de la fermeture de l'interface readline
+rl.on('close', () => {
+  // Vérifie si l'entrée n'est pas en mode TTY (piped)
+  if (!process.stdin.isTTY) {
+    // Affiche le message de fermeture avec un saut de ligne
+    process.stdout.write('This important software is now closing\n');
+  }
 });
