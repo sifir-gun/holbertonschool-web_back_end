@@ -1,19 +1,18 @@
-const readline = require('readline');
+// 1-stdin.js
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+// Affiche le message de bienvenue
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-// Prompt the user for their name
-rl.question('Welcome to Holberton School, what is your name? ', (name) => {
+// Variable pour stocker le nom de l'utilisateur
+let name = '';
+
+// Écoute de l'événement 'data' pour capturer l'entrée de l'utilisateur
+process.stdin.on('data', (data) => {
+  name += data.toString().trim();
   console.log(`Your name is: ${name}`);
-  rl.close();
 });
 
-// When the input stream ends, display the closing message.
-rl.on('close', () => {
-  if (!process.stdin.isTTY) {
-    console.log('This important software is now closing');
-  }
+// Écoute de l'événement 'end' pour détecter la fin de l'entrée
+process.stdin.on('end', () => {
+  console.log('This important software is now closing');
 });
